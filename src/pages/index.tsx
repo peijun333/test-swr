@@ -1,5 +1,7 @@
+import { UserList } from '~/components/UserList';
+
 const Component: React.FC = () => {
-  return <div>index</div>;
+  return <UserList />;
 };
 
 export default Component;
