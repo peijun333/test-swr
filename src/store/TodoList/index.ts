@@ -1,9 +1,17 @@
+import { useState } from 'react'
 import useSWR from 'swr'
-import { fetchTodoList } from '~/api/todolist'
+import { fetchTodoList, updateTodoList } from '~/api/todolist'
 import { Todo } from '~/types/Todo'
 
 export const useTodoList = () => {
-  const { data: todoList } = useSWR<Todo[]>('/fetchTodoList', fetchTodoList)
+  const [value, setValue] = useState('')
+  const { data: todoList, mutate } = useSWR<Todo[]>('/fetchTodoList', fetchTodoList)
 
-  return { todoList }
+  const onUpdateTodoList = async () => {
+    await updateTodoList(value)
+    setValue('')
+    // ここでrefetchしているので二回リクエストが飛ぶことになる。
+    mutate()
+  }
+  return { todoList, value, setValue, onUpdateTodoList }
 }
