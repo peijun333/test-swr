@@ -1,7 +1,7 @@
-import { UserList } from '~/components/UserList';
+import { TodoList } from '~/components/TodoList'
 
 const Component: React.FC = () => {
-  return <UserList />;
-};
+  return <TodoList />
+}
 
-export default Component;
+export default Component
